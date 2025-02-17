@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div th:fragment="header-side-nav-out">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">DAFC Centenary Club</a>
+        </div>
+
+        <div class="navbar-default sidebar" role="navigation">
+            <img th:src="@{/static/images/cc.png}" alt="DAFC Centenary Club Badge"
+                 style=" width: 90%; height: auto; margin-left:5px; margin-top:17px; margin-bottom: 15px"/>
+
+        </div>
+    </nav>
+</div>
+
+</body>
+</html>
