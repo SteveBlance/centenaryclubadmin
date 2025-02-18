@@ -113,7 +113,7 @@ public class SecuritySubjectService extends LifelineService implements UserDetai
     }
 
     public void updatePassword(SecuritySubjectViewBean securitySubjectViewBean) throws SubjectPasswordIncorrectException {
-        SecuritySubject securitySubject = securitySubjectRepository.getOne(securitySubjectViewBean.getId());
+        SecuritySubject securitySubject = securitySubjectRepository.getReferenceById(securitySubjectViewBean.getId());
         String enteredCurrentPassword = securitySubjectViewBean.getPreviousPassword();
         String storedCurrentPassword = securitySubject.getPassword();
         String enteredNewPassword = securitySubjectViewBean.getPassword();

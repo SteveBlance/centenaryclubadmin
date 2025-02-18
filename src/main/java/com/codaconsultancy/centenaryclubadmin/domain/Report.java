@@ -13,7 +13,7 @@ public class Report {
     public static final String NUMBER_OF_CANCELLED_MEMBERS = "Number of cancelled members";
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "NAME")

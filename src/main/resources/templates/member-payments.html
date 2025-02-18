@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/common-header :: common-header"></head>
+
+<body>
+<div id="wrapper">
+
+    <div th:include="/fragments/navigation :: header-side-nav"></div>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="cclifeline-header"></h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12 col-md-6">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-money fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge"><span th:text="${member.forename + ' ' + member.surname}"></span>
+                                </div>
+                                <div>Payments</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <table id="payments_tab" class="table-condensed table-striped table-bordered table-hover" cellspacing="0"
+               width="100%">
+            <thead>
+            <tr>
+                <th>Payment Date</th>
+                <th>Payment Amount (£)</th>
+                <th>Credit Reference</th>
+                <th>Name</th>
+                <th>Credited Account</th>
+                <th>Member</th>
+                <th>Lottery Payment?</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="payment: ${payments}"
+                style="cursor: pointer"
+                th:onclick="'javascript:rowClicked(\'' + ${payment.id} + '\');'">
+                <td th:text="${#dates.format(payment.paymentDate, 'yyyy/MM/dd')}">Payment Date</td>
+                <td th:text="${#numbers.formatDecimal(payment.paymentAmount, 0, 'COMMA', 2, 'POINT')}">Payment Amount
+                </td>
+                <td th:text="${payment.creditReference}">Credit Reference</td>
+                <td th:text="${payment.name}">Name</td>
+                <td th:text="${payment.creditedAccount}">Credited Account</td>
+                <td th:text="${payment.member}? ${payment.member.membershipNumber + ': ' + payment.member.forename + ' '
+                + payment.member.surname}">Member
+                </td>
+                <td th:style="${payment.isLotteryPayment()}? 'color: green' : 'color: red'"
+                    th:utext="${payment.isLotteryPayment()}? '&lt;strong&gt;Yes&lt;/strong&gt;' : '&lt;strong&gt;No&lt;/strong&gt;'">
+                    Is Lottery Payment?
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <script type="text/javascript" src="/js/jquery.dataTables.js"></script>
+        <script>
+            function rowClicked(value) {
+                location.href = "/payment/" + value;
+            }
+        </script>
+        <script type="text/javascript" language="javascript" class="init">
+            $(document).ready(function () {
+                $('#payments_tab').DataTable({
+                    "order": [[0, 'desc']]
+                });
+            });
+        </script>
+
+        <br/>
+        <div class="row">
+            <a th:href="@{/}" class="btn btn-default active" role="button">Back</a>
+            <a th:href="@{/add-payment}" class="btn btn-success" role="button">Add Payment</a>
+        </div>
+    </div>
+</div>
+<br/>
+</body>
+</html>

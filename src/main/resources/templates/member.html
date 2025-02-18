@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/common-header :: common-header"></head>
+
+<body>
+<div id="wrapper">
+
+    <div th:include="/fragments/navigation :: header-side-nav"></div>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="cclifeline-header"></h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-users fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge"><span th:text="${member.forename + ' ' + member.surname}"></span>
+                                </div>
+                                <div>Member Details</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <table id="member_tab" class="table-condensed table-striped table-bordered" cellspacing="0"
+                       width="100%">
+                    <thead></thead>
+                    <tbody>
+                    <tr th:style="${member.isEligibleForDrawStored()}? 'background-color: #dff0d8' : 'background-color: #f2dede'">
+                        <td class="col-sm-3"><strong>Eligible For Draw</strong></td>
+                        <td class="col-sm-8" th:text="${member.isEligibleForDrawStored()}? Yes : No">Eligible For Draw
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Last Payment Date</strong></td>
+                        <td th:text="${member.lastPayment} ? ${#dates.format(member.lastPayment.paymentDate, 'yyyy/MM/dd')}">
+                            Last Payment
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Last Payment Amount (£)</strong></td>
+                        <td th:text="${member.lastPayment} ? ${#numbers.formatDecimal(member.lastPayment.paymentAmount, 0, 'COMMA', 2, 'POINT')}">
+                            Last Payment
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Membership No</strong></td>
+                        <td th:text="${member.membershipNumber}">Membership No</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Forename</strong></td>
+                        <td th:text="${member.forename}">Forename</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Surname</strong></td>
+                        <td th:text="${member.surname}">Surname</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Membership Type</strong></td>
+                        <td th:text="${member.membershipType}">Membership Type</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Status</strong></td>
+                        <td th:text="${member.status}">Status</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Payer Type</strong></td>
+                        <td th:text="${member.fanbaseId} ? ${member.payerType} + ' (ID: ' + ${member.fanbaseId} + ')' : ${member.payerType}">Payer Type</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Join Date</strong></td>
+                        <td th:text="${member.joinDate} ? ${#dates.format(member.joinDate, 'dd/MM/yyyy')}">Join Date
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Leave Date</strong></td>
+                        <td th:text="${member.leaveDate} ? ${#dates.format(member.leaveDate, 'dd/MM/yyyy')}">Leave
+                            Date
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Email</strong></td>
+                        <td th:text="${member.email}">Email</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Phone Number</strong></td>
+                        <td th:text="${member.landlineNumber}">Phone Number</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mobile Number</strong></td>
+                        <td th:text="${member.mobileNumber}">Mobile Number</td>
+                    </tr>
+                    <tr th:if="${!member.addresses.isEmpty()}">
+                        <td><strong>Address</strong></td>
+                        <td th:utext="${member.addresses.get(0).formattedAddress}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Comments</strong></td>
+                        <td th:text="${member.comments}">Comments</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Contact preference</strong></td>
+                        <td th:text="${member.emailOptOut} ? 'No - does not wish to be contacted' : 'Yes - happy to be contacted' ">Contact preference</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br/>
+            <div class="row">
+                <a th:href="@{/members/current}" class="btn btn-default active" role="button">Back</a>
+                <a th:href="@{/payment-references/member/}+ ${member.membershipNumber}" class="btn btn-info"
+                   role="button">Payment References</a>
+                <a th:href="@{/payments/member/}+ ${member.membershipNumber}" class="btn btn-info"
+                   role="button">Payments</a>
+                <a th:href="@{/edit-member/} + ${member.membershipNumber}" class="btn btn-primary"
+                   role="button">Edit</a>
+            </div>
+        </div>
+        <br/>
+
+    </div>
+
+
+    <script type="text/javascript" src="/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" language="javascript" class="init">
+
+        $(document).ready(function () {
+            $('#member_tab').DataTable({
+                "order": [[0, 'desc']]
+            });
+        });
+
+    </script>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/common-header :: common-header}"></head>
+
+<body>
+
+<div id="wrapper">
+
+    <div th:include="~{/fragments/navigation :: header-side-nav}"></div>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="cclifeline-header"></h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-users fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge"><span th:text="${memberCount}"></span></div>
+                                <div>Members</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a th:href="@{members/all}">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Members</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                    <a th:href="@{add-member}">
+                        <div class="panel-footer">
+                            <span class="pull-left">Add Member</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-money fa-5x"></i>
+                            </div>
+
+                            <div class="col-xs-9 text-right">
+                                <div class="huge"><i class="fa fa-gbp" aria-hidden="true"></i></div>
+                                <div>Payments</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a th:href="@{payments/recent}">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Payments</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                    <a th:href="@{add-payment}">
+                        <div class="panel-footer">
+                            <span class="pull-left">Enter Payments</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-yellow">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-trophy fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge"><span th:text="${totalNumberOfWinners}"></span></div>
+                                <div>Draw Winners</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a th:href="@{draws}">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Draws</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                    <a th:href="@{prepare-draw}">
+                        <div class="panel-footer">
+                            <span class="pull-left">Make Draw</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-red">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-bar-chart fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge"><i class="fa fa-line-chart fa"></i></div>
+                                <div>Reports</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a th:href="@{reports}">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Reports</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                    <a th:href="@{export-data}">
+                        <div class="panel-footer">
+                            <span class="pull-left">Export Data</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-9">
+                                <div class="large">Last Draw</div>
+                                <div><span th:text="${lastDraw.name}"></span> - <span
+                                        th:text="${#dates.format(lastDraw.lotteryDate, 'dd/MM/yyyy')}"></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-3 text-right">
+                                <i class="fa fa-ticket fa-4x"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- /.panel-heading -->
+                    <div class="container-fluid">
+
+                        <div class="panel-body">
+
+                            <table id="winners_tab" class="table-condensed table-striped table-bordered"
+                                   cellspacing="0"
+                                   width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Prize</th>
+                                    <th>Membership Number</th>
+                                    <th>Name</th>
+                                    <th>Town</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="prize: ${lastDraw.prizes}">
+                                    <td th:text="${prize.prize}">Prize</td>
+                                    <td th:text="${prize.winner.membershipNumber}">Membership Number</td>
+                                    <td th:text="${prize.winner.forename + ' ' + prize.winner.surname}">Name</td>
+                                    <td th:text="${prize.winner.getAddresses().get(0).town}">Town</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.col-lg-8 -->
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-bell fa-fw"></i> Notifications Panel
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item" th:each="notification : ${notifications}">
+                                <span th:utext="${notification.getFontAwesomeIcon()}"></span>
+                                <span th:text="${notification.description}"></span>
+                                <span style="font-style: italic;" class="pull-right text-muted small"
+                                      th:text="${notification.getPrettyTime()}"></span>
+                            </a>
+                        </div>
+                        <!-- /.list-group -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+
+            </div>
+            <!-- /.col-lg-4 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+</body>
+
+</html>
+

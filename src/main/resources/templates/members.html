@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/common-header :: common-header"></head>
+
+<body>
+<div id="wrapper">
+
+    <div th:include="/fragments/navigation :: header-side-nav"></div>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="cclifeline-header"></h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-users fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge"><span th:text="${memberCount}"></span></div>
+                                <div><span th:text="${title}"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="nav nav-tabs">
+            <li role="presentation" th:class="${allTabStatus}"><a th:href="@{/members/all}">All</a></li>
+            <li role="presentation" th:class="${currentTabStatus}"><a th:href="@{/members/current}">Current</a></li>
+            <li role="presentation" th:class="${eligibleTabStatus}"><a th:href="@{/members/eligible}">Eligible</a></li>
+            <li role="presentation" th:class="${recentlyLapsedTabStatus}"><a th:href="@{/members/recently-lapsed}">Lapsed</a>
+            </li>
+            <li role="presentation" th:class="${formerTabStatus}"><a th:href="@{/members/former}">Former</a></li>
+            <li role="presentation" th:class="${pendingTabStatus}"><a th:href="@{/members/pending}">Pending</a></li>
+        </ul>
+        <br/>
+
+        <table id="members_tab" class="table-condensed table-striped table-bordered table-hover" cellspacing="0"
+               width="100%">
+            <thead>
+            <tr>
+                <th>Member No</th>
+                <th>Forename</th>
+                <th>Surname</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Payments</th>
+                <th>Fanbase ID</th>
+                <th>Email</th>
+                <th>Landline</th>
+                <th>Mobile</th>
+                <th>Eligible</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:class="${member.isEligibleForDrawStored()}? success : danger" th:each="member: ${members}"
+                style="cursor: pointer"
+                th:onclick="'javascript:rowClicked(\'' + ${member.membershipNumber} + '\');'">
+                <td th:text="${member.membershipNumber}">Membership No</td>
+                <td th:text="${member.forename}">Forename</td>
+                <td th:text="${member.surname}">Surname</td>
+                <td th:text="${member.membershipType}">Membership Type</td>
+                <td th:text="${member.status}">Status</td>
+                <td th:text="${member.payerType}">Payer Type</td>
+                <td th:text="${member.isFanbasePayer()}? ${member.fanbaseId} : '-'">Fanbase ID</td>
+                <td th:text="${member.email}">Email</td>
+                <td th:text="${member.landlineNumber}">Phone Number</td>
+                <td th:text="${member.mobileNumber}">Mobile Number</td>
+                <td th:style="${member.isEligibleForDrawStored()}? 'color: green' : 'color: red'"
+                    th:utext="${member.isEligibleForDrawStored()}? '&lt;strong&gt;Yes&lt;/strong&gt;' : '&lt;strong&gt;No&lt;/strong&gt;'">
+                    Eligible For Draw
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+
+        <script type="text/javascript" src="/static/js/jquery.dataTables.js"></script>
+        <script>
+            function rowClicked(value) {
+                location.href = "/member/" + value;
+            }
+        </script>
+        <script type="text/javascript"  class="init">
+
+            $(document).ready(function () {
+                $('#members_tab').DataTable(
+                    {
+                        "order": [[0, 'desc']]
+                    }
+                );
+            });
+
+        </script>
+
+        <br/>
+        <div class="row">
+<!--            <form action="#" th:action="@{/close-lapsed-memberships}" method="post">-->
+            <a th:href="@{/}" class="btn btn-default active" role="button">Back</a>
+            <a th:href="@{/add-member}" class="btn btn-success" role="button">Add New Member</a>
+<!--            </form>-->
+        </div>
+    </div>
+</div>
+<br/>
+</body>
+</html>
