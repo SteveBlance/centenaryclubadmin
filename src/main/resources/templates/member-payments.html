@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/fragments/common-header :: common-header"></head>
+<head th:replace="~{/fragments/common-header :: common-header}"></head>
 
 <body>
 <div id="wrapper">
 
-    <div th:include="/fragments/navigation :: header-side-nav"></div>
+    <div th:insert="~{/fragments/navigation :: header-side-nav}"></div>
 
     <div id="page-wrapper">
         <div class="row">
@@ -78,7 +78,7 @@
         <script type="text/javascript" language="javascript" class="init">
             $(document).ready(function () {
                 $('#payments_tab').DataTable({
-                    "order": [[0, 'desc']]
+                    "order": [ [0, 'desc'] ]
                 });
             });
         </script>
