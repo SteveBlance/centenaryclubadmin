@@ -25,25 +25,34 @@
                                 <i class="fa fa-money fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge"><span th:text="${member.forename + ' ' + member.surname}"></span>
-                                </div>
-                                <div>Payments</div>
+                                <div class="huge"><i class="fa fa-gbp" aria-hidden="true"></i></div>
+                                <div><span th:text="${title}"></span></div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div th:if="${alertMessage != ''}" th:class="${alertClass}" role="alert"
+                     th:text="${alertMessage}"></div>
             </div>
         </div>
+        <ul class="nav nav-tabs">
+            <li role="presentation" th:class="${recentTabStatus}"><a th:href="@{/payments/recent}">Recent</a></li>
+            <!--<li role="presentation" th:class="${matchedTabStatus}"><a th:href="@{/payments/matched}">Matched</a></li>-->
+            <li role="presentation" th:class="${unmatchedTabStatus}"><a th:href="@{/payments/unmatched}">Unmatched</a>
+            </li>
+            <li role="presentation" th:class="${nonLotteryTabStatus}"><a
+                    th:href="@{/payments/non-lottery}">Non-lottery</a></li>
+            <!--<li role="presentation" th:class="${allTabStatus}"><a th:href="@{/payments/all}">All</a></li>-->
+        </ul>
         <br/>
         <table id="payments_tab" class="table-condensed table-striped table-bordered table-hover" cellspacing="0"
                width="100%">
             <thead>
             <tr>
-                <th>Payment Date</th>
-                <th>Payment Amount (£)</th>
+                <th>Date</th>
+                <th>Amount (£)</th>
                 <th>Credit Reference</th>
                 <th>Name</th>
-                <th>Credited Account</th>
                 <th>Member</th>
                 <th>Lottery Payment?</th>
             </tr>
@@ -57,10 +66,7 @@
                 </td>
                 <td th:text="${payment.creditReference}">Credit Reference</td>
                 <td th:text="${payment.name}">Name</td>
-                <td th:text="${payment.creditedAccount}">Credited Account</td>
-                <td th:text="${payment.member}? ${payment.member.membershipNumber + ': ' + payment.member.forename + ' '
-                + payment.member.surname}">Member
-                </td>
+                <td th:text="${payment.memberDisplayText}? ${payment.memberDisplayText}">Member</td>
                 <td th:style="${payment.isLotteryPayment()}? 'color: green' : 'color: red'"
                     th:utext="${payment.isLotteryPayment()}? '&lt;strong&gt;Yes&lt;/strong&gt;' : '&lt;strong&gt;No&lt;/strong&gt;'">
                     Is Lottery Payment?

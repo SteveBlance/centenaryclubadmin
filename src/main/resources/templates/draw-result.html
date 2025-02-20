@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/common-header :: common-header}"></head>
+
+<body>
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <div th:insert="~{/fragments/navigation :: header-side-nav}"></div>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="cclifeline-header"></h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-trophy fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge"><i class="fa fa-ticket" aria-hidden="true"></i></div>
+                                <div>Draw Result - <span
+                                        th:text="${lotteryDraw.lotteryDate} ? ${#dates.format(lotteryDraw.lotteryDate, 'dd/MM/yyyy')}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <table id="lottery_draw_tab" class="table-condensed table-striped table-bordered" cellspacing="0"
+                       width="100%">
+                    <thead></thead>
+                    <tbody>
+
+                    <tr>
+                        <td><strong>Draw Name</strong></td>
+                        <td th:text="${lotteryDraw.name}">Draw Name</td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-sm-3"><strong>Lottery Date</strong></td>
+                        <td class="col-sm-8"
+                            th:text="${lotteryDraw.lotteryDate} ? ${#dates.format(lotteryDraw.lotteryDate, 'dd/MM/yyyy')}">
+                            Lottery Date
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Drawn By</strong></td>
+                        <td th:text="${lotteryDraw.drawMaster}">Drawn By</td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-sm-3"><strong>Date Drawn</strong></td>
+                        <td class="col-sm-8"
+                            th:text="${lotteryDraw.drawDate} ? ${#dates.format(lotteryDraw.drawDate, 'dd/MM/yyyy')}">
+                            Draw Date
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Number of Prizes</strong></td>
+                        <td th:text="${numberOfPrizes}">Number of Prizes</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br/>
+            <div class="row">
+                <table id="winners_tab" class="table-condensed table-striped table-bordered table-hover"
+                       cellspacing="0"
+                       width="100%">
+                    <thead>
+                    <tr>
+                        <th>Prize</th>
+                        <th>Membership Number</th>
+                        <th>Name</th>
+                        <th>Town</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Mobile</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="prize: ${lotteryDraw.prizes}" style="cursor: pointer"
+                        th:onclick="'javascript:rowClicked(\'' + ${prize.winner.membershipNumber} + '\');'">
+                        <td th:text="${prize.prize}">Prize</td>
+                        <td th:text="${prize.winner.isFanbasePayer()}? ${prize.winner.membershipNumber} + '/Fanbase-'+${prize.winner.fanbaseId} : ${prize.winner.membershipNumber}">Membership Number</td>
+                        <td th:text="${prize.winner.forename + ' ' + prize.winner.surname}">Name</td>
+                        <td th:text="${prize.winner.getAddresses().get(0).town}">Town</td>
+                        <td th:text="${prize.winner.email}">Email</td>
+                        <td th:text="${prize.winner.landlineNumber}">Phone</td>
+                        <td th:text="${prize.winner.mobileNumber}">Mobile</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br/>
+            <div class="row">
+                <a th:href="@{/draws}" class="btn btn-default active" role="button">Draws</a>
+            </div>
+        </div>
+        <br/>
+
+    </div>
+
+    <script type="text/javascript" src="/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" language="javascript" class="init">
+
+        $(document).ready(function () {
+            $('#lottery_draw_tab').DataTable();
+            $('#winners_tab').DataTable();
+        });
+
+    </script>
+
+    <script>
+        function rowClicked(value) {
+            location.href = "/member/" + value;
+        }
+    </script>
+</div>
+
+</body>
+</html>

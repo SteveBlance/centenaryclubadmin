@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/common-header :: common-header}"></head>
+
+<body>
+<div id="wrapper">
+
+    <div th:insert="~{/fragments/navigation :: header-side-nav}"></div>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="cclifeline-header"></h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12 col-md-6">
+                <div class="panel panel-yellow">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-trophy fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge"><span th:text="${totalNumberOfWinners}"></span></div>
+                                <div>Winners</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table id="draws_tab" class="table-condensed table-striped table-bordered table-hover" cellspacing="0"
+               width="100%">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Draw Name</th>
+                <th>Winners</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="draw: ${lotteryDraws}"
+                style="cursor: pointer"
+                th:onclick="'javascript:rowClicked(\'' + ${draw.id} + '\');'">
+                <td th:text="${draw.lotteryDate} ? ${#dates.format(draw.lotteryDate, 'yyyy/MM/dd')}">Lottery Date</td>
+                <td th:text="${draw.name}">Draw Name</td>
+                <td th:text="${draw.showPrizesSummary()}">Winners</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <script type="text/javascript" src="/js/jquery.dataTables.js"></script>
+        <script>
+            function rowClicked(value) {
+                location.href = "/draw/" + value;
+            }
+        </script>
+        <script type="text/javascript" language="javascript" class="init">
+            $(document).ready(function () {
+                $('#draws_tab').DataTable({
+                    "order": [ [0, 'desc'] ]
+                });
+            });
+        </script>
+        <br/>
+        <div class="row">
+            <a th:href="@{/}" class="btn btn-default active" role="button">Back</a>
+            <a th:href="@{prepare-draw}" class="btn btn-success" role="button">Make Draw</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

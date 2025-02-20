@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/common-header :: common-header}"></head>
+
+<body>
+
+<div th:insert="~{/fragments/navigation :: header-side-nav}"></div>
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="cclifeline-header"></h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-users fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><i class="fa fa-user" aria-hidden="true"></i></div>
+                            <div>Edit Address</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form id="createAddressForm" class="form-horizontal" role="form" action="#" th:action="@{/address}"
+          th:object="${address}" method="post">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Address Line 1:</label>
+            <div class="col-sm-7">
+                <input type="text" required="required" class="form-control" th:field="*{addressLine1}"
+                       placeholder="House/Flat number and street"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Address Line 2</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" th:field="*{addressLine2}" placeholder="(Optional)"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Address Line 3</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" th:field="*{addressLine3}" placeholder="(Optional)"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Town</label>
+            <div class="col-sm-7">
+                <input type="text" required="required" class="form-control" th:field="*{town}"
+                       placeholder="e.g. Dunfermline"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Region</label>
+            <div class="col-sm-7">
+                <input type="text" required="required" class="form-control" th:field="*{region}"
+                       placeholder="e.g. Fife"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Postcode</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" th:field="*{postcode}" placeholder="(Optional)"/>
+            </div>
+        </div>
+
+        <div class="form-group" hidden="hidden">
+            <label for="is_active_chk" class="col-sm-3 control-label">Make default address:</label>
+            <div class="col-sm-7">
+                <input id="is_active_chk" type="checkbox" class="form-control" th:field="*{isActive}"/>
+            </div>
+        </div>
+
+        <div class="form-group" hidden="hidden">
+            <label for="member_id" class="col-sm-3 control-label">Make default address:</label>
+            <div class="col-sm-7">
+                <input id="member_id" type="number" class="form-control" th:field="*{memberId}"/>
+            </div>
+            <label for="address_id" class="col-sm-3 control-label">Make default address:</label>
+            <div class="col-sm-7">
+                <input id="address_id" type="number" class="form-control" th:field="*{id}"/>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <a th:href="@{/member/} + ${member.membershipNumber}" class="btn btn-default " role="button">Back</a>
+            <button id="resetBtn" type="reset" class="btn btn-default btn-danger">Reset</button>
+            <button id="createBtn" type="submit" class="btn btn-default btn-success active">Save</button>
+
+        </div>
+    </form>
+    <br/>
+
+</div>
+
+</body>
+</html>

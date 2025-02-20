@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/common-header :: common-header}"></head>
+
+<body>
+<div id="wrapper">
+
+    <div th:insert="~{/fragments/navigation :: header-side-nav}"></div>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="cclifeline-header"></h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-6">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-money fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge"><i class="fa fa-gbp" aria-hidden="true"></i></div>
+                                <div><span th:text="Payment"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <table id="payment_tab" class="table-condensed table-striped table-bordered" cellspacing="0"
+                       width="100%">
+                    <thead></thead>
+                    <tbody>
+                    <tr>
+                        <td class="col-sm-3"><strong>Payment Date</strong></td>
+                        <td class="col-sm-8" th:text="${#dates.format(payment.paymentDate, 'yyyy/MM/dd')}">Payment
+                            Date
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Payment Amount (£)</strong></td>
+                        <td th:text="${#numbers.formatDecimal(payment.paymentAmount, 0, 'COMMA', 2, 'POINT')}">Payment
+                            Amount
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Credit Reference</strong></td>
+                        <td th:text="${payment.creditReference}">Credit Reference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Name</strong></td>
+                        <td th:text="${payment.name}">Name</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Credited Account</strong></td>
+                        <td th:text="${payment.creditedAccount}">Credited Account</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lottery Payment?</strong></td>
+                        <td th:style="${payment.isLotteryPayment()}? 'color: green' : 'color: red'"
+                            th:utext="${payment.isLotteryPayment()}? '&lt;strong&gt;Yes&lt;/strong&gt;' : '&lt;strong&gt;No&lt;/strong&gt;'">
+                            Is Lottery Payment?
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Member</strong></td>
+                        <td th:text="${payment.member}? ${payment.member.membershipNumber + ': ' + payment.member.forename + ' '
+                + payment.member.surname}">Member
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Comments</strong></td>
+                        <td th:text="${payment.comments}">Comments</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br/>
+            <div class="row">
+                <a th:href="@{/payments/recent}" class="btn btn-default active" role="button">Back</a>
+                <a th:href="@{/edit-payment/} + ${payment.id}" class="btn btn-primary"
+                   role="button">Edit</a>
+                <button th:if="${payment.isLotteryPayment()}" id="markNonLotteryConfirmation"
+                        class="btn btn-default btn-primary">Mark as non-lottery payment
+                </button>
+                <button th:if="${!payment.isLotteryPayment()}" id="markLotteryConfirmation"
+                        class="btn btn-default btn-primary">Mark as lottery payment
+                </button>
+                <button id="deleteConfirmation" class="btn btn-default btn-danger">Delete</button>
+            </div>
+
+            <script>
+                $(function () {
+                    $("#dialog-confirm-delete").dialog({
+                        autoOpen: false,
+                        modal: true
+                    });
+
+                    $("#deleteConfirmation").on("click", function () {
+                        $("#dialog-confirm-delete").dialog("open");
+                    });
+                    $("#closeModal").on("click", function () {
+                        $("#dialog-confirm-delete").dialog("close");
+                    });
+                });
+
+                $(function () {
+                    $("#dialog-confirm-mark-non-lottery").dialog({
+                        autoOpen: false,
+                        modal: true
+                    });
+
+                    $("#markNonLotteryConfirmation").on("click", function () {
+                        $("#dialog-confirm-mark-non-lottery").dialog("open");
+                    });
+                    $("#closeModal").on("click", function () {
+                        $("#dialog-confirm-mark-non-lottery").dialog("close");
+                    });
+                });
+
+                $(function () {
+                    $("#dialog-confirm-mark-lottery").dialog({
+                        autoOpen: false,
+                        modal: true
+                    });
+
+                    $("#markLotteryConfirmation").on("click", function () {
+                        $("#dialog-confirm-mark-lottery").dialog("open");
+                    });
+                    $("#closeModal").on("click", function () {
+                        $("#dialog-confirm-mark-lottery").dialog("close");
+                    });
+                });
+
+            </script>
+
+            <div id="dialog-confirm-delete" title="Confirm Delete Payment" style="display:none;">
+                <p>Delete this payment?</p>
+                <form action="#" th:action="@{'/delete-payment/{id}'(id=${payment.id})}" th:method="POST">
+                    <input type="hidden" name="_method" value="post"/>
+                    <button type="submit" id="confirmDelete" class="btn btn-default btn-success">
+                        Yes
+                    </button>
+                    <button type="button" class="btn btn-default btn-danger" id="closeDeleteModal">No</button>
+
+                </form>
+            </div>
+            <div id="dialog-confirm-mark-non-lottery" title="Confirm Non-Lottery" style="display:none;">
+                <p>Mark this as a non-lottery payment?</p>
+                <form action="#" th:action="@{'/mark-payment-non-lottery/{id}'(id=${payment.id})}" th:method="POST">
+                    <input type="hidden" name="_method" value="post"/>
+                    <button type="submit" id="confirmChangeNon" class="btn btn-default btn-success">
+                        Yes
+                    </button>
+                    <button type="button" class="btn btn-default btn-danger" id="closeChangeNonModal">No</button>
+
+                </form>
+            </div>
+            <div id="dialog-confirm-mark-lottery" title="Confirm For Lottery" style="display:none;">
+                <p>Mark this as a lottery payment?</p>
+                <form action="#" th:action="@{'/mark-payment-for-lottery/{id}'(id=${payment.id})}" th:method="POST">
+                    <input type="hidden" name="_method" value="post"/>
+                    <button type="submit" id="confirmChangeFor" class="btn btn-default btn-success">
+                        Yes
+                    </button>
+                    <button type="button" class="btn btn-default btn-danger" id="closeChangeForModal">No</button>
+
+                </form>
+            </div>
+
+        </div>
+        <br/>
+
+    </div>
+
+
+    <script type="text/javascript" src="/static/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" language="javascript" class="init">
+
+        $(document).ready(function () {
+            $('#payment_tab').DataTable({});
+        });
+
+    </script>
+</div>
+
+</body>
+</html>
