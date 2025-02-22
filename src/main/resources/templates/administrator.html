@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/common-header :: common-header}"></head>
+
+<body>
+<div id="wrapper">
+
+    <div th:insert="~{/fragments/navigation :: header-side-nav}"></div>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="cclifeline-header"></h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-user-plus fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge"><span th:text="${administrator.forename + ' ' + administrator.surname}"></span>
+                                </div>
+                                <div>Account Details</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <table id="member_tab" class="table-condensed table-striped table-bordered" cellspacing="0"
+                       width="100%">
+                    <thead></thead>
+                    <tbody>
+                    <tr>
+                        <td class="col-sm-3"><strong>Username</strong></td>
+                        <td class="col-sm-8" th:text="${administrator.username}">Username</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Forename</strong></td>
+                        <td th:text="${administrator.forename}">Forename</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Surname</strong></td>
+                        <td th:text="${administrator.surname}">Surname</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br/>
+            <div class="row">
+                <a th:href="@{/}" class="btn btn-default active" role="button">Home</a>
+                <a th:href="@{/edit-administrator}" class="btn btn-primary"
+                   role="button">Edit</a>
+            </div>
+        </div>
+        <br/>
+
+    </div>
+
+
+    <script type="text/javascript" src="/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" language="javascript" class="init">
+
+        $(document).ready(function () {
+            $('#member_tab').DataTable({
+                "order": [ [0, 'desc'] ]
+            });
+        });
+
+    </script>
+</div>
+
+</body>
+</html>

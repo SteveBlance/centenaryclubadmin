@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/fragments/common-header :: common-header}"></head>
+
+<body>
+<div id="wrapper">
+
+    <div th:insert="~{/fragments/navigation :: header-side-nav}"></div>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="cclifeline-header"></h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12 col-md-6">
+                <div class="panel panel-red">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-bar-chart fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge"><i class="fa fa-line-chart fa"></i></div>
+                                <div>Reports</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-lg-8">
+                <div th:insert="/fragments/area-chart :: area-chart"></div>
+                <div th:insert="/fragments/bar-chart :: bar-chart"></div>
+            </div>
+            <div class="col-lg-4">
+                 <div th:insert="/fragments/pie-chart :: pie-chart"></div>
+                <div th:insert="/fragments/line-chart :: line-chart"></div>
+            </div>
+        </div>
+
+
+        <br/>
+        <div class="row">
+            <a th:href="@{/}" class="btn btn-default active" role="button">Back</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/vendor/raphael/raphael.min.js"></script>
+<script type="text/javascript" src="/vendor/morrisjs/morris.min.js"></script>
+<script type="text/javascript" src="/data/morris-data.js"></script>
+</body>
+</html>

@@ -6,6 +6,13 @@
 <body>
 <script th:src="@{/static/js/jquery.js}"></script>
 <script th:src="@{/static/js/jquery-ui.js}"></script>
+<script>
+    $(function () {
+        $(".datepicker").datepicker({
+            dateFormat: "dd/mm/yy"
+        });
+    });
+</script>
 <div th:insert="~{/fragments/navigation :: header-side-nav}"></div>
 
 <div id="page-wrapper">
@@ -21,12 +28,11 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-key fa-5x"></i>
-
+                            <i class="fa fa-cog fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge"><i class="fa fa-key" aria-hidden="true"></i></div>
-                            <div>Change Password</div>
+                            <div class="huge"><i class="fa fa-user-plus" aria-hidden="true"></i></div>
+                            <div>Add Administrator</div>
                         </div>
                     </div>
                 </div>
@@ -37,37 +43,41 @@
          th:text="${alertMessage}">
     </div>
 
-    <form id="createAdminForm" class="form-horizontal" role="form" action="#" th:action="@{/change-password}"
-          th:object="${user}" method="post">
-
+    <form id="createAdminForm" class="form-horizontal" role="form" action="#" th:action="@{/administrator}"
+          th:object="${administrator}" method="post">
         <div class="form-group">
-            <input type="hidden" required="required" class="form-control" th:field="*{id}"/>
-            <input type="hidden" required="required" class="form-control" th:field="*{username}"/>
-            <input type="hidden" required="required" class="form-control" th:field="*{forename}"/>
-            <input type="hidden" required="required" class="form-control" th:field="*{surname}"/>
-        </div>
-
-        <div class="form-group">
-            <label class="col-sm-3 control-label">Current Password:</label>
+            <label class="col-sm-3 control-label">Forename:</label>
             <div class="col-sm-7">
-                <input type="password" class="form-control" th:field="*{previousPassword}" autocomplete="off"/>
+                <input type="text" required="required" class="form-control" th:field="*{forename}"/>
             </div>
         </div>
-
         <div class="form-group">
-            <label class="col-sm-3 control-label">New Password:</label>
+            <label class="col-sm-3 control-label">Surname:</label>
+            <div class="col-sm-7">
+                <input type="text" required="required" class="form-control" th:field="*{surname}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Username:</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" th:field="*{username}" autocomplete="off"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Temporary Password:</label>
             <div class="col-sm-7">
                 <input type="password" class="form-control" th:field="*{password}" autocomplete="off"/>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">Confirm New Password:</label>
+            <label class="col-sm-3 control-label">Confirm Password:</label>
             <div class="col-sm-7">
                 <input type="password" class="form-control" th:field="*{confirmPassword}" autocomplete="off"/>
             </div>
         </div>
 
         <div class="row">
+            <a th:href="@{/}" class="btn btn-default " role="button">Back</a>
             <button id="resetBtn" type="reset" class="btn btn-default btn-danger">Reset</button>
             <button id="createBtn" type="submit" class="btn btn-default btn-success active">Save</button>
 

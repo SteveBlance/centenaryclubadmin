@@ -16,7 +16,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/home", "/static/dist/css/sb-admin-2.css", "/static/vendor/font-awesome/css/font-awesome.min.css","/resources/**", "/static/css/**", "/static/dist/css/**", "/static/images/**",
+                        .requestMatchers("/static/dist/css/sb-admin-2.css", "/static/vendor/font-awesome/css/font-awesome.min.css","/resources/**", "/static/css/**", "/static/dist/css/**", "/static/images/**",
                                 "/static/js/**", "/static/less/**", "/static/vendor/morrisjs/**",
                                 "/static/vendor/bootstrap/css/**", "/static/vendor/bootstrap/fonts/**", "/static/vendor/bootstrap/js/**",
                                 "/static/vendor/font-awesome/css/**", "/static/vendor/font-awesome/fonts/**", "/static/vendor/font-awesome/less/**", "/static/vendor/font-awesome/scss/**").permitAll()
