@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -220,7 +221,7 @@ public class PaymentController extends LifelineController {
         String contents;
         try {
             ByteArrayInputStream stream = new ByteArrayInputStream(file.getBytes());
-            contents = IOUtils.toString(stream, "UTF-8");
+            contents = IOUtils.toString(stream, StandardCharsets.UTF_8);
             parsedPayments = paymentService.parsePayments(contents, filename);
             paymentService.savePayments(parsedPayments);
         } catch (IOException | NumberFormatException | ArrayIndexOutOfBoundsException e) {
