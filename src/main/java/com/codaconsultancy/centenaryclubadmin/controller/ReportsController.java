@@ -54,24 +54,30 @@ public class ReportsController extends LifelineController {
     private String allDrawsCSV() {
         List<LotteryDraw> lotteryDraws = lotteryDrawService.fetchAllLotteryDraws();
         StringBuilder drawsCSV = new StringBuilder();
-        drawsCSV.append("Lottery date,Draw name,Drawn by,Winners").append("\n");
+        drawsCSV.append("Lottery date,Draw name,Winners").append("\n");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         for (LotteryDraw lotteryDraw : lotteryDraws) {
-            drawsCSV.append(sdf.format(lotteryDraw.getDrawDate())).append(",")
+            drawsCSV.append(sdf.format(lotteryDraw.getLotteryDate())).append(",")
                     .append(lotteryDraw.getName()).append(",")
-                    .append(lotteryDraw.getDrawMaster()).append(",")
                     .append("\"");
             List<Prize> prizes = lotteryDraw.getPrizes();
             StringBuilder winners = new StringBuilder();
             String prefix = "";
             for (Prize prize : prizes) {
                 Member winner = prize.getWinner();
+                StringBuilder winnerId = new StringBuilder();
+                Long membershipNumber = winner.getMembershipNumber();
+                if (winner.isFanbasePayer()) {
+                    winnerId.append(membershipNumber).append("/Fanbase-").append(winner.getFanbaseId());
+                } else {
+                    winnerId.append(membershipNumber);
+                }
                 winners.append(prefix)
                         .append(prize.getPrize()).append(": ")
                         .append(winner.getForename()).append(" ")
                         .append(winner.getSurname()).append(", ")
-                        .append(winner.getAddresses().get(0).getTown()).append(" (")
-                        .append(winner.getMembershipNumber()).append(")");
+                        .append(winner.getAddresses().getFirst().getTown()).append(" (")
+                        .append(winnerId).append(")");
                  prefix = ", ";
             }
             drawsCSV.append(winners).append("\"\n");

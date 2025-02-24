@@ -11,20 +11,24 @@
         // select the payerType dropdown
         const payerTypeSelect = $('select[name="payerType"]');
 
-        // select the div with id "fanbaseId"
+        // select the fanbase div and input
         const fanbaseIds = $('.fanbase');
+        const fanbaseInput = $('#fanbase-input');
 
-        // hide the div initially
-        fanbaseIds.hide();
+        // // show the div initially
+        // fanbaseIds.show();
 
         // add change event listener to the advertType dropdown
         payerTypeSelect.change(function() {
-            if ($(this).val() === 'Fanbase') {
-                // show the div if Fanbase is selected
-                fanbaseIds.show();
-            } else {
-                // hide the div otherwise
+            if ($(this).val() !== 'Fanbase') {
+                // hide the div if Fanbase is not selected
                 fanbaseIds.hide();
+                fanbaseInput.prop('required',false);
+
+            } else {
+                // show the div otherwise
+                fanbaseInput.prop('required',true);
+                fanbaseIds.show();
             }
         });
     });
@@ -95,8 +99,8 @@
             <label class="col-sm-3 control-label">Payer Type:</label>
             <div class="col-sm-7">
                 <select name="payerType" class="form-control" th:field="*{payerType}">
-                    <option th:value="Monthly" th:selected="selected">Monthly (Standing Order)</option>
-                    <option th:value="Fanbase">Monthly (Fanbase)</option>
+                    <option th:value="Fanbase" th:selected="selected">Monthly (Fanbase)</option>
+                    <option th:value="Monthly">Monthly (Standing Order)</option>
                     <option th:value="Quarterly">Quarterly</option>
                     <option th:value="Annual">Annual</option>
                 </select>
@@ -105,7 +109,7 @@
         <div class="form-group fanbase">
             <label class="col-sm-3 control-label fanbase">Fanbase ID:</label>
             <div class="col-sm-7 fanbase">
-                <input type="text" class="form-control" th:field="*{fanbaseId}"/>
+                <input id="fanbase-input" type="text" class="form-control" th:field="*{fanbaseId}"/>
             </div>
         </div>
         <div class="form-group">
