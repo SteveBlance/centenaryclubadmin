@@ -2,6 +2,8 @@ package com.codaconsultancy.centenaryclubadmin.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 import com.ocpsoft.pretty.time.PrettyTime;
@@ -22,54 +24,29 @@ public class Notification {
         this.description = description;
     }
 
+    @Getter
+    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Getter
+    @Setter
     @NotNull
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "EVENT_DATE")
     private Date eventDate;
 
-
+    @Getter
+    @Setter
     @NotNull
     @Column(name = "EVENT_TYPE")
     private String eventType;
 
+    @Getter
+    @Setter
     @Column(name = "DESCRIPTION")
     private String description;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getEventDate() {
-        return eventDate;
-    }
-
-    public void setEventDate(Date eventDate) {
-        this.eventDate = eventDate;
-    }
-
-    public String getEventType() {
-        return eventType;
-    }
-
-    public void setEventType(String eventType) {
-        this.eventType = eventType;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     @Transient
     public String getPrettyTime() {
