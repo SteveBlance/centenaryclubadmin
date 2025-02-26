@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{/fragments/common-header :: common-header}"></head>
+<head th:replace="~{fragments/common-header :: common-header}"></head>
 
 <body>
 <script th:src="@{/static/js/jquery.js}"></script>
@@ -15,7 +15,7 @@
 </script>
 <div id="wrapper">
 
-    <div th:insert="~{/fragments/navigation :: header-side-nav}"></div>
+    <div th:insert="~{fragments/navigation :: header-side-nav}"></div>
 
     <div id="page-wrapper">
         <div class="row">
