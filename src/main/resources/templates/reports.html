@@ -36,12 +36,12 @@
         <br/>
         <div class="row">
             <div class="col-lg-8">
-                <div th:insert="/fragments/area-chart :: area-chart"></div>
-                <div th:insert="/fragments/bar-chart :: bar-chart"></div>
+                <div th:insert="~{fragments/area-chart :: area-chart}"></div>
+                <div th:insert="~{fragments/bar-chart :: bar-chart}"></div>
             </div>
             <div class="col-lg-4">
-                 <div th:insert="/fragments/pie-chart :: pie-chart"></div>
-                <div th:insert="/fragments/line-chart :: line-chart"></div>
+                 <div th:insert="~{fragments/pie-chart :: pie-chart}"></div>
+                <div th:insert="~{fragments/line-chart :: line-chart}"></div>
             </div>
         </div>
 
