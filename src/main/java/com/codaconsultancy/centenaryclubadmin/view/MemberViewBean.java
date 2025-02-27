@@ -6,12 +6,15 @@ import com.codaconsultancy.centenaryclubadmin.domain.PaymentReference;
 import com.codaconsultancy.centenaryclubadmin.domain.Prize;
 import com.codaconsultancy.centenaryclubadmin.mappers.MemberMapper;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Setter
 public class MemberViewBean {
 
     public MemberViewBean() {
@@ -89,104 +92,52 @@ public class MemberViewBean {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Long getMembershipNumber() {
         return membershipNumber;
-    }
-
-    public void setMembershipNumber(Long membershipNumber) {
-        this.membershipNumber = membershipNumber;
     }
 
     public String getMembershipType() {
         return membershipType;
     }
 
-    public void setMembershipType(String membershipType) {
-        this.membershipType = membershipType;
-    }
-
     public String getStatus() {
         return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getForename() {
         return forename;
     }
 
-    public void setForename(String forename) {
-        this.forename = forename;
-    }
-
     public String getSurname() {
         return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public String getPayerType() {
         return payerType;
     }
 
-    public void setPayerType(String payerType) {
-        this.payerType = payerType;
-    }
-
     public Date getJoinDate() {
         return joinDate;
-    }
-
-    public void setJoinDate(Date joinDate) {
-        this.joinDate = joinDate;
     }
 
     public Date getLeaveDate() {
         return leaveDate;
     }
 
-    public void setLeaveDate(Date leaveDate) {
-        this.leaveDate = leaveDate;
-    }
-
     public String getComments() {
         return comments;
-    }
-
-    public void setComments(String comments) {
-        this.comments = comments;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getLandlineNumber() {
         return landlineNumber;
     }
 
-    public void setLandlineNumber(String landlineNumber) {
-        this.landlineNumber = landlineNumber;
-    }
-
     public String getMobileNumber() {
         return mobileNumber;
-    }
-
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
     }
 
     public Date getCardRequestDate() {
@@ -217,28 +168,12 @@ public class MemberViewBean {
         return addresses;
     }
 
-    public void setAddresses(List<AddressViewBean> addresses) {
-        this.addresses = addresses;
-    }
-
-    public void setPrizeWins(List<Prize> prizeWins) {
-        this.prizeWins = prizeWins;
-    }
-
     public List<Prize> getPrizeWins() {
         return prizeWins;
     }
 
     public List<PaymentReference> getPaymentReferences() {
         return paymentReferences;
-    }
-
-    public void setPaymentReferences(List<PaymentReference> paymentReferences) {
-        this.paymentReferences = paymentReferences;
-    }
-
-    public void setLastPayment(Payment lastPayment) {
-        this.lastPayment = lastPayment;
     }
 
     public Payment getLastPayment() {
@@ -253,10 +188,6 @@ public class MemberViewBean {
         return isEligibleForDrawStored;
     }
 
-    public void setIsEligibleForDrawStored(boolean isEligibleForDrawStored) {
-        this.isEligibleForDrawStored = isEligibleForDrawStored;
-    }
-
     public void setEligibleForDrawStored(boolean isEligibleForDrawStored) {
         this.isEligibleForDrawStored = isEligibleForDrawStored;
     }
@@ -265,16 +196,8 @@ public class MemberViewBean {
         return emailOptOut;
     }
 
-    public void setEmailOptOut(boolean emailOptOut) {
-        this.emailOptOut = emailOptOut;
-    }
-
     public Integer getFanbaseId() {
         return fanbaseId;
-    }
-
-    public void setFanbaseId(Integer fanbaseId) {
-        this.fanbaseId = fanbaseId;
     }
 
     public boolean hasFanbaseId() {
