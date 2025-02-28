@@ -3,8 +3,11 @@ package com.codaconsultancy.centenaryclubadmin.view;
 import com.codaconsultancy.centenaryclubadmin.domain.Address;
 import com.codaconsultancy.centenaryclubadmin.mappers.AddressMapper;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
-
+@Getter
+@Setter
 public class AddressViewBean {
 
     private Long id;
@@ -28,70 +31,6 @@ public class AddressViewBean {
 
     private Long memberId;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getAddressLine1() {
-        return addressLine1;
-    }
-
-    public void setAddressLine1(String addressLine1) {
-        this.addressLine1 = addressLine1;
-    }
-
-    public String getAddressLine2() {
-        return addressLine2;
-    }
-
-    public void setAddressLine2(String addressLine2) {
-        this.addressLine2 = addressLine2;
-    }
-
-    public String getAddressLine3() {
-        return addressLine3;
-    }
-
-    public void setAddressLine3(String addressLine3) {
-        this.addressLine3 = addressLine3;
-    }
-
-    public String getTown() {
-        return town;
-    }
-
-    public void setTown(String town) {
-        this.town = town;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public String getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
-
-    public Boolean getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(Boolean isActive) {
-        this.isActive = isActive;
-    }
-
     public String getFormattedAddress() {
         StringBuilder formattedAddress = new StringBuilder(addressLine1);
         if (null != addressLine2 && !addressLine2.isEmpty()) {
@@ -106,14 +45,6 @@ public class AddressViewBean {
             formattedAddress.append("<br/>").append(postcode);
         }
         return formattedAddress.toString();
-    }
-
-    public void setMemberId(Long memberId) {
-        this.memberId = memberId;
-    }
-
-    public Long getMemberId() {
-        return memberId;
     }
 
     public Address toEntity() {

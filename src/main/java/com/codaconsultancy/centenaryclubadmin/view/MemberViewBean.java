@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Getter
 @Setter
 public class MemberViewBean {
 
@@ -88,116 +89,8 @@ public class MemberViewBean {
     private boolean emailOptOut;
     private Integer fanbaseId;
 
-    public Long getId() {
-        return id;
-    }
-
-    public Long getMembershipNumber() {
-        return membershipNumber;
-    }
-
-    public String getMembershipType() {
-        return membershipType;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public String getForename() {
-        return forename;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public String getPayerType() {
-        return payerType;
-    }
-
-    public Date getJoinDate() {
-        return joinDate;
-    }
-
-    public Date getLeaveDate() {
-        return leaveDate;
-    }
-
-    public String getComments() {
-        return comments;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getLandlineNumber() {
-        return landlineNumber;
-    }
-
-    public String getMobileNumber() {
-        return mobileNumber;
-    }
-
-    public Date getCardRequestDate() {
-        return cardRequestDate;
-    }
-
-    public void setCardRequestDate(Date cardRequestDate) {
-        this.cardRequestDate = cardRequestDate;
-    }
-
-    public Date getCardIssuedDate() {
-        return cardIssuedDate;
-    }
-
-    public void setCardIssuedDate(Date cardIssuedDate) {
-        this.cardIssuedDate = cardIssuedDate;
-    }
-
-    public Date getWelcomeLetterIssuedDate() {
-        return welcomeLetterIssuedDate;
-    }
-
-    public void setWelcomeLetterIssuedDate(Date welcomeLetterIssuedDate) {
-        this.welcomeLetterIssuedDate = welcomeLetterIssuedDate;
-    }
-
-    public List<AddressViewBean> getAddresses() {
-        return addresses;
-    }
-
-    public List<Prize> getPrizeWins() {
-        return prizeWins;
-    }
-
-    public List<PaymentReference> getPaymentReferences() {
-        return paymentReferences;
-    }
-
-    public Payment getLastPayment() {
-        return lastPayment;
-    }
-
     public Member toEntity() {
         return MemberMapper.INSTANCE.viewBeanToEntity(this);
-    }
-
-    public boolean isEligibleForDrawStored() {
-        return isEligibleForDrawStored;
-    }
-
-    public void setEligibleForDrawStored(boolean isEligibleForDrawStored) {
-        this.isEligibleForDrawStored = isEligibleForDrawStored;
-    }
-
-    public boolean isEmailOptOut() {
-        return emailOptOut;
-    }
-
-    public Integer getFanbaseId() {
-        return fanbaseId;
     }
 
     public boolean hasFanbaseId() {

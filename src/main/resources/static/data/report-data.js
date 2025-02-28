@@ -53,7 +53,7 @@ $(function () {
         label: "Legacy Members",
         value: 80
     }, {
-        label: "Lifeline Members",
+        label: "Full Members",
         value: 654
     }];
 

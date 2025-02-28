@@ -11,6 +11,8 @@ import com.ocpsoft.pretty.time.PrettyTime;
 
 import java.util.Date;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "notifications")
 public class Notification {
@@ -24,27 +26,19 @@ public class Notification {
         this.description = description;
     }
 
-    @Getter
-    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Getter
-    @Setter
     @NotNull
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "EVENT_DATE")
     private Date eventDate;
 
-    @Getter
-    @Setter
     @NotNull
     @Column(name = "EVENT_TYPE")
     private String eventType;
 
-    @Getter
-    @Setter
     @Column(name = "DESCRIPTION")
     private String description;
 

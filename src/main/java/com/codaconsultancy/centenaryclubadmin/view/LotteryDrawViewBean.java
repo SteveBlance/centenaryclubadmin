@@ -5,12 +5,16 @@ import com.codaconsultancy.centenaryclubadmin.domain.Member;
 import com.codaconsultancy.centenaryclubadmin.domain.Prize;
 import com.codaconsultancy.centenaryclubadmin.mappers.LotteryDrawMapper;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Getter
+@Setter
 public class LotteryDrawViewBean {
 
     private Long id;
@@ -31,70 +35,14 @@ public class LotteryDrawViewBean {
 
     private List<Prize> prizes = new ArrayList<>();
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getDrawDate() {
-        return drawDate;
-    }
-
-    public void setDrawDate(Date drawDate) {
-        this.drawDate = drawDate;
-    }
-
-    public Date getLotteryDate() {
-        return lotteryDate;
-    }
-
-    public void setLotteryDate(Date lotteryDate) {
-        this.lotteryDate = lotteryDate;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDrawMaster() {
-        return drawMaster;
-    }
-
-    public void setDrawMaster(String drawMaster) {
-        this.drawMaster = drawMaster;
-    }
-
-    public List<Prize> getPrizes() {
-        return prizes;
-    }
-
-    public void setPrizes(List<Prize> prizes) {
-        this.prizes = prizes;
-    }
-
-    public Integer getNumberOfPrizes() {
-        return numberOfPrizes;
-    }
-
-    public void setNumberOfPrizes(Integer numberOfPrizes) {
-        this.numberOfPrizes = numberOfPrizes;
-    }
-
     public String showPrizesSummary() {
         StringBuilder prizeSummary = new StringBuilder();
         List<Prize> prizes = this.prizes;
         for (Prize prize : prizes) {
             Member winner = prize.getWinner();
             prizeSummary.append(prize.getPrize()).append(": ").append(winner.getForename()).append(" ").append(winner.getSurname());
-            if (null != winner.getAddresses().get(0).getTown() && !winner.getAddresses().get(0).getTown().isEmpty()) {
-                prizeSummary.append(", ").append(winner.getAddresses().get(0).getTown());
+            if (null != winner.getAddresses().getFirst().getTown() && !winner.getAddresses().getFirst().getTown().isEmpty()) {
+                prizeSummary.append(", ").append(winner.getAddresses().getFirst().getTown());
             }
             Long membershipNumber = winner.getMembershipNumber();
             String memberNumberDisplay = String.format("%d", membershipNumber);
@@ -105,8 +53,7 @@ public class LotteryDrawViewBean {
         }
         prizeSummary.deleteCharAt(prizeSummary.length() - 1);
         prizeSummary.deleteCharAt(prizeSummary.length() - 1);
-        String summaryString = prizeSummary.toString();
-        return summaryString;
+        return prizeSummary.toString();
     }
 
     public LotteryDraw toEntity() {

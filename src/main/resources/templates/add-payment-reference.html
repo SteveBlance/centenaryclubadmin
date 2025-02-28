@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/common-header :: common-header}"></head>
+
+<body>
+
+<div th:insert="~{fragments/navigation :: header-side-nav}"></div>
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="cclifeline-header"></h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12 col-md-6">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-money fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge"><i class="fa fa-gbp" aria-hidden="true"></i></div>
+                            <div>Enter Payment Reference</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <form id="createPaymentReferenceForm" class="form-horizontal" role="form" action="#"
+              th:action="@{/payment-reference}"
+              th:object="${paymentReference}" method="post">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Membership Number:</label>
+                <div class="col-sm-7">
+                    <input type="text" readonly="readonly" class="form-control" th:field="*{member.membershipNumber}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Surname:</label>
+                <div class="col-sm-7">
+                    <input type="text" readonly="readonly" class="form-control" th:field="*{member.surname}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Reference:</label>
+                <div class="col-sm-7">
+                    <input type="text" required="required" class="form-control" th:field="*{reference}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Name:</label>
+                <div class="col-sm-7">
+                    <input type="text" required="required" class="form-control" th:field="*{name}"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="panel-body">
+                    <a th:href="@{/member/} + ${paymentReference.member.membershipNumber}" class="btn btn-default "
+                       role="button">Back</a>
+                    <button id="resetBtn" type="reset" class="btn btn-default btn-danger">Reset</button>
+                    <button id="createBtn" type="submit" class="btn btn-default btn-success active">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<br/>
+
+</body>
+</html>

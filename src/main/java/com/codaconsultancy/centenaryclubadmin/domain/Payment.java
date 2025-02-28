@@ -10,6 +10,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "payments")
 public class Payment {
@@ -26,53 +28,35 @@ public class Payment {
         this.isLotteryPayment = isLotteryPayment;
     }
 
-    @Getter
-    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Getter
-    @Setter
     @NotNull
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "PAYMENT_DATE")
     private Date paymentDate;
 
-    @Getter
-    @Setter
     @NotNull
     @Column(name = "PAYMENT_AMOUNT")
     private Float paymentAmount;
 
-    @Getter
-    @Setter
     @NotNull
     @Column(name = "CREDIT_REFERENCE")
     private String creditReference;
 
-    @Getter
-    @Setter
     @Column(name = "CREDITED_ACCOUNT")
     private String creditedAccount;
 
-    @Getter
-    @Setter
     @Column(name = "NAME")
     private String name;
 
-    @Getter
-    @Setter
     @Column(name = "IS_LOTTERY_PAYMENT")
     private boolean isLotteryPayment;
 
-    @Getter
-    @Setter
     @Column(name = "COMMENTS")
     private String comments;
 
-    @Getter
-    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
     

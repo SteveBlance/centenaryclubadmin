@@ -12,42 +12,32 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "lottery_draws")
 public class LotteryDraw {
 
-    @Getter
-    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Getter
-    @Setter
     @Column(name = "DRAW_DATE")
     @NotNull
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date drawDate;
 
-    @Getter
-    @Setter
     @Column(name = "LOTTERY_DATE")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date lotteryDate;
 
-    @Getter
-    @Setter
     @Column(name = "NAME")
     private String name;
 
-    @Getter
-    @Setter
     @Column(name = "DRAW_MASTER")
     @NotNull
     private String drawMaster;
 
-    @Getter
-    @Setter
     @OneToMany(mappedBy = "lotteryDraw")
     private List<Prize> prizes = new ArrayList<>();
 

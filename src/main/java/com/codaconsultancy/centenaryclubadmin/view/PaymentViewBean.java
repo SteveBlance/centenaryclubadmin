@@ -2,11 +2,15 @@ package com.codaconsultancy.centenaryclubadmin.view;
 
 import com.codaconsultancy.centenaryclubadmin.domain.Payment;
 import com.codaconsultancy.centenaryclubadmin.mappers.PaymentMapper;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.validation.constraints.NotNull;
 import java.util.Date;
 
+@Getter
+@Setter
 public class PaymentViewBean {
 
     public PaymentViewBean() {
@@ -50,106 +54,12 @@ public class PaymentViewBean {
     private String creditReference;
 
     private String creditedAccount;
-
     private String name;
-
     private Long memberId;
-
     private String memberDisplayText;
-
     private boolean isLotteryPayment;
-
     private String comments;
-
     private boolean storeReferenceForMatching;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getPaymentDate() {
-        return paymentDate;
-    }
-
-    public void setPaymentDate(Date paymentDate) {
-        this.paymentDate = paymentDate;
-    }
-
-    public Float getPaymentAmount() {
-        return paymentAmount;
-    }
-
-    public void setPaymentAmount(Float paymentAmount) {
-        this.paymentAmount = paymentAmount;
-    }
-
-    public String getCreditedAccount() {
-        return creditedAccount;
-    }
-
-    public void setCreditedAccount(String creditedAccount) {
-        this.creditedAccount = creditedAccount;
-    }
-
-    public String getCreditReference() {
-        return creditReference;
-    }
-
-    public void setCreditReference(String creditReference) {
-        this.creditReference = creditReference;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isStoreReferenceForMatching() {
-        return storeReferenceForMatching;
-    }
-
-    public void setStoreReferenceForMatching(boolean storeReferenceForMatching) {
-        this.storeReferenceForMatching = storeReferenceForMatching;
-    }
-
-    public boolean isLotteryPayment() {
-        return isLotteryPayment;
-    }
-
-    public void setLotteryPayment(boolean isLotteryPayment) {
-        this.isLotteryPayment = isLotteryPayment;
-    }
-
-    public String getComments() {
-        return comments;
-    }
-
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
-
-    public Long getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(Long memberId) {
-        this.memberId = memberId;
-    }
-
-    public String getMemberDisplayText() {
-        return memberDisplayText;
-    }
-
-    public void setMemberDisplayText(String memberDisplayText) {
-        this.memberDisplayText = memberDisplayText;
-    }
 
     public Payment toEntity() {
         return PaymentMapper.INSTANCE.viewBeanToEntity(this);

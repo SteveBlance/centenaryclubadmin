@@ -1,5 +1,10 @@
 package com.codaconsultancy.centenaryclubadmin.view;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ReportViewBean {
 
     private Long id;
@@ -15,22 +20,6 @@ public class ReportViewBean {
 
     public ReportViewBean(Long id, String reportType) {
         this.id = id;
-        this.reportType = reportType;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getReportType() {
-        return reportType;
-    }
-
-    public void setReportType(String reportType) {
         this.reportType = reportType;
     }
 }

@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "event_log")
 public class EventLog {
@@ -16,14 +18,10 @@ public class EventLog {
         this.message = message;
     }
 
-    @Getter
-    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Getter
-    @Setter
     @NotNull
     @Column(name = "MESSAGE")
     private String message;
