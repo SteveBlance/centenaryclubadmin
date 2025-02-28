@@ -95,9 +95,9 @@ $(function () {
         { year: '2024', value: 146500 }
     ];
     Morris.Line({
-        colors: ['#f0ad4e'],
+        lineColors: ['#f0ad4e'],
         // ID of the element in which to draw the chart.
-        element: 'morris-line-chart',
+        element: 'prizes-line-chart',
         // Chart data records -- each entry in this array corresponds to a point on
         // the chart.
         data: prizesIssuedData,
@@ -107,7 +107,7 @@ $(function () {
         ykeys: ['value'],
         // Labels for the ykeys -- will be displayed when you hover over the
         // chart.
-        labels: ['Value']
+        labels: ['Running total (£)']
     });
 
 });

@@ -147,9 +147,6 @@
                                         th:text="${#dates.format(lastDraw.lotteryDate, 'dd/MM/yyyy')}"></span>
                                 </div>
                             </div>
-                            <div class="col-xs-3 text-right">
-                                <i class="fa fa-ticket fa-4x"></i>
-                            </div>
                         </div>
                     </div>
 
@@ -171,6 +168,47 @@
                                 </thead>
                                 <tbody>
                                 <tr th:each="prize: ${lastDraw.prizes}">
+                                    <td th:text="${prize.prize}">Prize</td>
+                                    <td th:text="${prize.winner.membershipNumber}">Membership Number</td>
+                                    <td th:text="${prize.winner.forename + ' ' + prize.winner.surname}">Name</td>
+                                    <td th:text="${prize.winner.getAddresses().get(0).town}">Town</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-9">
+                                <div class="large">Previous Draw</div>
+                                <div><span th:text="${previousDraw.name}"></span> - <span
+                                        th:text="${#dates.format(previousDraw.lotteryDate, 'dd/MM/yyyy')}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- /.panel-heading -->
+                    <div class="container-fluid">
+
+                        <div class="panel-body">
+
+                            <table id="prev_winners_tab" class="table-condensed table-striped table-bordered"
+                                   cellspacing="0"
+                                   width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Prize</th>
+                                    <th>Membership Number</th>
+                                    <th>Name</th>
+                                    <th>Town</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="prize: ${previousDraw.prizes}">
                                     <td th:text="${prize.prize}">Prize</td>
                                     <td th:text="${prize.winner.membershipNumber}">Membership Number</td>
                                     <td th:text="${prize.winner.forename + ' ' + prize.winner.surname}">Name</td>

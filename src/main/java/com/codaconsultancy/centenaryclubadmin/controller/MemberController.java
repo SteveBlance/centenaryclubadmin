@@ -51,10 +51,12 @@ public class MemberController extends LifelineController {
         long count = memberService.countAllCurrentMembers();
         Long totalNumberOfWinners = lotteryDrawService.countAllWinners();
         LotteryDraw lastDraw = lotteryDrawService.fetchLastDraw();
+        LotteryDraw previousDraw = lotteryDrawService.fetchSecondLastDraw();
         return modelAndView("index")
                 .addObject("memberCount", count)
                 .addObject("totalNumberOfWinners", totalNumberOfWinners)
-                .addObject("lastDraw", lastDraw);
+                .addObject("lastDraw", lastDraw)
+                .addObject("previousDraw", previousDraw);
     }
 
     @RequestMapping("/members/{filter}")

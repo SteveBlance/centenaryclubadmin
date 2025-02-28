@@ -25,8 +25,9 @@
                                 <i class="fa fa-bar-chart fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge"><i class="fa fa-line-chart fa"></i></div>
-                                <div>Reports</div>
+<!--                                <div class="huge"><i class="fa fa-line-chart fa"></i></div>-->
+                                <div class="huge"><i class="fa fa-coffee fa"></i></div>
+                                <div>Reports (Under construction)</div>
                             </div>
                         </div>
                     </div>
@@ -42,7 +43,7 @@
             </div>
             <div class="col-lg-6">
                  <div th:insert="~{fragments/chart-member-types-pie :: member-pie-chart}"></div>
-                <div th:insert="~{fragments/line-chart :: line-chart}"></div>
+                <div th:insert="~{fragments/chart-total-prizes-line :: total-prizes-chart}"></div>
             </div>
         </div>
 
@@ -55,6 +56,6 @@
 </div>
 <script type="text/javascript" src="/vendor/raphael/raphael.min.js"></script>
 <script type="text/javascript" src="/vendor/morrisjs/morris.min.js"></script>
-<script type="text/javascript" src="/data/member-type-data.js"></script>
+<script type="text/javascript" src="/data/report-data.js"></script>
 </body>
 </html>
