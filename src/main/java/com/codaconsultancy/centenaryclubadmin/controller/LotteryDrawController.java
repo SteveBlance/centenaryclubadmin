@@ -62,7 +62,7 @@ public class LotteryDrawController extends LifelineController {
     @RequestMapping(value = "/prepare-draw", method = RequestMethod.POST)
     public ModelAndView prepareDraw(@Valid @ModelAttribute("lotteryDraw") LotteryDrawViewBean lotteryDrawViewBean, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            logger.debug("Validation errors for lotteryDraw: ", lotteryDrawViewBean);
+            logger.debug("Validation errors for lotteryDraw: {}", lotteryDrawViewBean);
             return navigateToPrepareDraw();
         }
         Integer numberOfPrizes = lotteryDrawViewBean.getNumberOfPrizes();
@@ -83,7 +83,7 @@ public class LotteryDrawController extends LifelineController {
     @RequestMapping(value = "/make-draw", method = RequestMethod.POST)
     public ModelAndView makeDraw(@Valid @ModelAttribute("lotteryDraw") LotteryDrawViewBean lotteryDrawViewBean, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            logger.debug("Validation errors for lotteryDraw: ", lotteryDrawViewBean);
+            logger.debug("Validation errors for lotteryDraw: {}", lotteryDrawViewBean);
             return navigateToPrepareDraw();
         }
         List<Prize> prizes = lotteryDrawViewBean.getPrizes();

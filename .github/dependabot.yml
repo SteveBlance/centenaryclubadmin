@@ -1,0 +1,14 @@
+version: 2
+updates:
+  # Your application dependencies (Maven or Gradle)
+  - package-ecosystem: "maven"   # use "gradle" instead if you use Gradle
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+
+  # GitHub Actions workflow versions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"

@@ -68,7 +68,7 @@ public class AdminController extends LifelineController {
     @RequestMapping(value = "/edit-administrator", method = RequestMethod.POST)
     public ModelAndView editMember(@Valid @ModelAttribute("administrator") SecuritySubject administrator, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            LOG.debug("Validation errors for administrator: ", administrator);
+            LOG.debug("Validation errors for administrator: {}", administrator);
             return navigateToEditAdministrator();
         }
         securitySubjectService.updateSecuritySubject(administrator);
@@ -77,7 +77,7 @@ public class AdminController extends LifelineController {
     @RequestMapping(value = "/administrator", method = RequestMethod.POST)
     public ModelAndView addNewAdministrator(@Valid @ModelAttribute("subject") SecuritySubjectViewBean securitySubjectViewBean, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            LOG.debug("Validation errors for securitySubject: ", securitySubjectViewBean);
+            LOG.debug("Validation errors for securitySubject: {}", securitySubjectViewBean);
             return modelAndView(ADD_ADMINISTRATOR_PAGE).addObject("administrator", securitySubjectViewBean);
         }
         try {
@@ -99,7 +99,7 @@ public class AdminController extends LifelineController {
     @RequestMapping(value = "/change-password", method = RequestMethod.POST)
     public ModelAndView changePassword(@Valid @ModelAttribute("user") SecuritySubjectViewBean securitySubjectViewBean, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            LOG.debug("Validation errors for securitySubject: ", securitySubjectViewBean);
+            LOG.debug("Validation errors for securitySubject: {}", securitySubjectViewBean);
             return navigateToChangePassword(securitySubjectViewBean.getUsername());
         }
         try {

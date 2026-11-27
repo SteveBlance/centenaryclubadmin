@@ -124,7 +124,7 @@ public class PaymentController extends LifelineController {
     @RequestMapping(value = "/edit-payment", method = RequestMethod.POST)
     public ModelAndView editPayment(@Valid @ModelAttribute("payment") PaymentViewBean paymentViewBean, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            logger.debug("Validation errors for payment: ", paymentViewBean);
+            logger.debug("Validation errors for payment: {}", paymentViewBean);
             return navigateToEditPayment(paymentViewBean.getId());
         }
         Member member = memberService.findMemberById(paymentViewBean.getMemberId());
@@ -143,7 +143,7 @@ public class PaymentController extends LifelineController {
     @RequestMapping(value = "/payment", method = RequestMethod.POST)
     public ModelAndView addPayment(@Valid @ModelAttribute("address") PaymentViewBean paymentViewBean, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            logger.debug("Validation errors for address: ", paymentViewBean);
+            logger.debug("Validation errors for address: {}", paymentViewBean);
             return navigateToAddPayment();
         }
         Payment payment = paymentViewBean.toEntity();
@@ -195,7 +195,7 @@ public class PaymentController extends LifelineController {
     public ModelAndView addPaymentReference(@Valid @ModelAttribute("paymentReference") PaymentReferenceViewBean paymentReferenceViewBean, BindingResult bindingResult) {
         Member member = memberService.findMemberByMembershipNumber(paymentReferenceViewBean.getMember().getMembershipNumber());
         if (bindingResult.hasErrors()) {
-            logger.debug("Validation errors for reference: ", paymentReferenceViewBean);
+            logger.debug("Validation errors for reference: {}", paymentReferenceViewBean);
             return navigateToAddPaymentReference(member.getMembershipNumber());
         }
         paymentReferenceViewBean.setIsActive(true);

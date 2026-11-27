@@ -119,7 +119,7 @@ public class MemberController extends LifelineController {
     @RequestMapping(value = "/member", method = RequestMethod.POST)
     public ModelAndView addMember(@Valid @ModelAttribute("member") MemberViewBean memberViewBean, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            logger.debug("Validation errors for member: ", memberViewBean);
+            logger.debug("Validation errors for member: {}", memberViewBean);
             return navigateToAddMember();
         }
 
@@ -138,7 +138,7 @@ public class MemberController extends LifelineController {
     @RequestMapping(value = "/edit-member", method = RequestMethod.POST)
     public ModelAndView editMember(@Valid @ModelAttribute("member") Member member, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            logger.debug("Validation errors for member: ", member);
+            logger.debug("Validation errors for member: {}", member);
             return navigateToEditMember(member.getMembershipNumber());
         }
 
@@ -173,7 +173,7 @@ public class MemberController extends LifelineController {
     @RequestMapping(value = "/address", method = RequestMethod.POST)
     public ModelAndView addAddress(@Valid @ModelAttribute("address") AddressViewBean addressViewBean, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            logger.debug("Validation errors for address: ", addressViewBean);
+            logger.debug("Validation errors for address: {}", addressViewBean);
             return navigateToAddAddress(addressViewBean.getMemberId());
         }
         Address address = addressViewBean.toEntity();
